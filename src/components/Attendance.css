@@ -5,12 +5,14 @@
   border-radius: 25px;
 }
 
-.animated-button.checkin:hover {
+.animated-button 
+.checkin:hover {
   background-color: #28a745;
   transform: scale(1.05);
 }
 
-.animated-button.checkout:hover {
+.animated-button 
+.checkout:hover {
   background-color: #dc3545;
   transform: scale(1.05);
 }

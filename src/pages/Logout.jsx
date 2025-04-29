@@ -1,11 +1,19 @@
-import { useContext, useEffect } from "react";
-import { UserContext } from "../context/UserContext";
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useUser } from '../context/UserContext';
+import { toast } from 'react-toastify';
 
-export default function Logout(){
-  const { logout } = useContext(UserContext);
+const Logout = () => {
+  const { setUser } = useUser();
+  const navigate = useNavigate();
 
-  useEffect (() => {
-    logout();
-  }, [logout]);
+  useEffect(() => {
+    setUser(null);
+    toast.success('Successfully logged out');
+    navigate('/');
+  }, [setUser, navigate]);
+
   return null;
-}
+};
+
+export default Logout;
