@@ -7,6 +7,9 @@ import Home from './components/Home';
 import ProtectedRoute from './components/ProtectedRoute';
 import AdminPage from './pages/AdminPage';
 import UserPage from './pages/UserPage';
+import AbcPage from './pages/AbcPage';
+import CustomNavbar from './components/CustomNavbar';
+
 
 const AppRouter = () => {
   return (
@@ -20,10 +23,12 @@ const AppRouter = () => {
           </ProtectedRoute>
         }
       />
+      <Route path="/navbar" element={<CustomNavbar />} />
       <Route path="/logout" element={<Logout />} />
       <Route path="/home" element={<Home />} />
       <Route path='/admin' element={<AdminPage/>}/>
       <Route path='/user' element={<UserPage/>}/>
+      <Route  path = '/abc' element={<AbcPage/>}/>
     </Routes>
   );
 };

@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 
 const Logout = () => {
   const { setUser } = useUser();
-  const navigate = useNavigate();
+  const navigate = useNavigate(); 
 
   useEffect(() => {
     setUser(null);

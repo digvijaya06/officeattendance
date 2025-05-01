@@ -5,46 +5,64 @@ import 'react-toastify/dist/ReactToastify.css';
 import './Attendance.css';
 
 const Attendance = () => {
-  const { checkInTime, setCheckInTime, checkedOutTime, setCheckedOutTime } = useUser();
+  const { user, abc, checkInTime, setCheckInTime, checkedOutTime, setCheckedOutTime } = useUser();
+
+  const saveAttendanceRecord = (record) => {
+    const records = JSON.parse(localStorage.getItem('attendanceRecords')) || [];
+    const existingIndex = records.findIndex(r => r.userEmail === record.userEmail);
+
+    if (existingIndex !== -1) {
+      records[existingIndex] = { ...records[existingIndex], ...record };
+    } else {
+      records.push(record);
+    }
+
+    localStorage.setItem('attendanceRecords', JSON.stringify(records));
+  };
 
   const handleCheckIn = () => {
     const now = new Date().toLocaleString();
     setCheckInTime(now);
+    if (user) saveAttendanceRecord({ userName: user.name, userEmail: user.email, checkInTime: now, checkedOutTime: null });
+    if (abc) saveAttendanceRecord({ userName: abc.name, userEmail: abc.email, checkInTime: now, checkedOutTime: null });
     toast.success('Checked In Successfully!');
   };
 
   const handleCheckOut = () => {
     const now = new Date().toLocaleString();
     setCheckedOutTime(now);
+    if (user) saveAttendanceRecord({ userName: user.name, userEmail: user.email, checkedOutTime: now });
+    if (abc) saveAttendanceRecord({ userName: abc.name, userEmail: abc.email, checkedOutTime: now });
     toast.info('Checked Out Successfully!');
   };
 
   return (
-    <div className='animated-button' style={{ textAlign: 'center', marginTop: '100px' }}>
-      <button
-        className='checkin'
-        onClick={handleCheckIn}
-        disabled={!!checkInTime}
-        style={{ padding: '10px 20px', margin: '10px' }}
-      >
-        Check In
-      </button>
-      <button
-        className='checkout'
-        onClick={handleCheckOut}
-        disabled={!checkInTime || !!checkedOutTime}
-        style={{ padding: '10px 20px', margin: '10px' }}
-      >
-        Check Out
-      </button>
+    <div className="container attendance-wrapper">
+      <div className="card attendance-card">
+        <h2>Attendance Tracker</h2>
+        <div className="button-group">
+          <button
+            className="btn btn-success animated-button me-2"
+            onClick={handleCheckIn}
+            disabled={!!checkInTime}
+          >
+            Check In
+          </button>
+          <button
+            className="btn btn-danger animated-button"
+            onClick={handleCheckOut}
+            disabled={!checkInTime || !!checkedOutTime}
+          >
+            Check Out
+          </button>
+        </div>
 
-      {/* Time Display */}
-      <div style={{ marginTop: '20px' }}>
-        {checkInTime && <p>Checked In At: {checkInTime}</p>}
-        {checkedOutTime && <p> Checked Out At: {checkedOutTime}</p>}
+        <div className="mt-4">
+          {checkInTime && <p><strong>Checked In At:</strong> {checkInTime}</p>}
+          {checkedOutTime && <p><strong>Checked Out At:</strong> {checkedOutTime}</p>}
+        </div>
       </div>
-
-      <ToastContainer position='top-center' autoClose={2000} />
+      <ToastContainer />
     </div>
   );
 };

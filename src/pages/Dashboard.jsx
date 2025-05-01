@@ -9,47 +9,64 @@ const Dashboard = () => {
   const { user, setUser, checkInTime, setCheckInTime, checkedOutTime, setCheckedOutTime } = useUser();
 
   const handleLogout = () => {
-    setUser(null); // Logging out
+    setUser(null); 
     toast.success('Successfully logged out');
     navigate('/');
   };
 
   const handleCheckIn = () => {
-    const now = new Date();
-    setCheckInTime(now.toLocaleString());
     toast.success('Checked In Successfully!');
   };
 
   const handleCheckOut = () => {
-    const now = new Date();
-    setCheckedOutTime(now.toLocaleString());
     toast.info('Checked Out Successfully!');
   };
 
   return (
-    <Container className="d-flex justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
-      <Row className="w-100">
-        <Col md={4} className="mx-auto p-4 border rounded shadow-sm">
-          <Card>
+    <Container className="mt-5">
+      <h1 className="text-center mb-4">Dashboard</h1>
+      <Row>
+        <Col md={4}>
+          <Card className="mb-4 shadow-sm">
             <Card.Body className="text-center">
-              {/* Displaying Welcome Message */}
-              <Card.Title>Welcome, {user ? user : 'Guest'}</Card.Title>
+              <Card.Title>Welcome, {user ? user.name : 'Guest'}</Card.Title>
+              {user && <Card.Subtitle className="mb-2 text-muted">{user.email}</Card.Subtitle>}
 
-              {/* Check In and Check Out Buttons */}
               <div className="d-flex justify-content-center gap-3 mt-4">
-                <Button variant="success" className="w-50" onClick={handleCheckIn} disabled={checkInTime !== null}>
+                <Button variant="success" className="w-50" onClick={handleCheckIn}>
                   Check In
                 </Button>
-                <Button variant="danger" className="w-50" onClick={handleCheckOut} disabled={!checkInTime || checkedOutTime !== null}>
+                <Button variant="danger" className="w-50" onClick={handleCheckOut}>
                   Check Out
                 </Button>
-                <Button variant='secondary' onClick={handleLogout}>Logout</Button>
+                <Button variant="secondary" onClick={handleLogout}>Logout</Button>
               </div>
-              {/* Display Check In and Check Out Times */}
-              <div className="mt-3 text-center">
-                {checkInTime && <p>Checked In At: {checkInTime}</p>}
-                {checkedOutTime && <p>Checked Out At: {checkedOutTime}</p>}
-              </div>
+            </Card.Body>
+          </Card>
+        </Col>
+        <Col md={4}>
+          <Card className="mb-4 shadow-sm">
+            <Card.Body className="text-center">
+              <Card.Title>Profile</Card.Title>
+              <Card.Text>
+                Manage your user profile and settings.
+              </Card.Text>
+              <Card.Link href="/user" className="btn btn-primary">
+                Go to Profile
+              </Card.Link>
+            </Card.Body>
+          </Card>
+        </Col>
+        <Col md={4}>
+          <Card className="mb-4 shadow-sm">
+            <Card.Body className="text-center">
+              <Card.Title>Reports</Card.Title>
+              <Card.Text>
+                Generate and view attendance reports.
+              </Card.Text>
+              <Card.Link href="/reports" className="btn btn-primary">
+                Go to Reports
+              </Card.Link>
             </Card.Body>
           </Card>
         </Col>

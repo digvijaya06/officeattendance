@@ -1,8 +1,17 @@
 .animated-button {
   transition: transform 0.3s ease-in-out, background-color 0.3s;
+  background-color: #0d6efd;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  box-shadow: 0 4px 6px rgba(13, 110, 253, 0.3);
 }
 .animated-button:hover {
   transform: scale(1.05);
-  background-color: #198754 !important;
+  background-color: #0b5ed7 !important;
   color: #fff;
+  box-shadow: 0 6px 12px rgba(11, 94, 215, 0.5);
 }

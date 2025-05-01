@@ -24,7 +24,7 @@ function App() {
   return (
     <UserProvider>
       <Router>
-        <Navbar /> {/* ✅ Moved inside Router + UserProvider */}
+        <Navbar /> 
         <AppRouter />
         <ToastContainer
           position="top-center"

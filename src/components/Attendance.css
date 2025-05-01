@@ -1,18 +1,51 @@
+body {
+  background: linear-gradient(135deg, #e0f7fa, #c8e6c9);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.attendance-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 0;
+}
+
+.attendance-card {
+  width: 100%;
+  max-width: 500px;
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  background-color: #fff;
+  text-align: center;
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+.attendance-card h2 {
+  margin-bottom: 25px;
+  color: #2c3e50;
+}
+
 .animated-button {
-  transition: all 0.3s ease;
-  padding: 10px 25px;
-  font-size: 1.2rem;
-  border-radius: 25px;
+  font-size: 1.1rem;
+  padding: 12px 25px;
+  font-weight: 600;
+  border-radius: 30px;
+  transition: all 0.3s ease-in-out;
 }
 
-.animated-button 
-.checkin:hover {
-  background-color: #28a745;
+.animated-button:hover {
   transform: scale(1.05);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
 }
 
-.animated-button 
-.checkout:hover {
-  background-color: #dc3545;
-  transform: scale(1.05);
+@keyframes fadeIn {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
